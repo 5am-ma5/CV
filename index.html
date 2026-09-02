@@ -5,422 +5,558 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Samuel Masson — CV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b0d10;
-    --panel:#12151a;
-    --panel-alt:#0e1116;
-    --line:#262b33;
-    --amber:#ffb454;
-    --amber-dim:#c98a3e;
-    --text:#e6e4de;
-    --text-dim:#8b93a1;
-    --ok:#7fd99a;
-    --chrome-r:#ff5f57;
-    --chrome-y:#febc2e;
-    --chrome-g:#28c840;
+    --bg:#f7f5f0;
+    --card:#ffffff;
+    --ink:#141414;
+    --gray:#6b7280;
+    --gray-light:#9aa0aa;
+    --orange:#ff5a2b;
+    --peach:#ffe3d1;
+    --dark:#0d0d0e;
+    --border:#141414;
+    --dot:#dcd8cf;
   }
-  *{box-sizing:border-box;}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
   body{
-    margin:0;
-    background:#05060a;
-    color:var(--text);
-    font-family:'IBM Plex Mono', monospace;
-    -webkit-font-smoothing:antialiased;
-    padding:28px 16px;
-  }
-
-  .window{
-    max-width:1020px;
-    margin:0 auto;
     background:var(--bg);
-    border:1px solid var(--line);
-    border-radius:8px;
-    overflow:hidden;
-    box-shadow:0 30px 80px rgba(0,0,0,0.55);
-    position:relative;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
   }
-  /* faint scanline atmosphere */
-  .window::after{
-    content:"";
-    position:absolute; inset:0;
-    background:repeating-linear-gradient(
-      to bottom, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px
-    );
-    pointer-events:none;
-    mix-blend-mode:overlay;
-  }
+  a{color:inherit;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
 
-  .chrome{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:12px 16px;
-    background:var(--panel-alt);
-    border-bottom:1px solid var(--line);
+  /* ================= NAV ================= */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--bg);
+    border-bottom:1.5px solid var(--ink);
   }
-  .dot{width:11px; height:11px; border-radius:50%;}
-  .dot.r{background:var(--chrome-r);} .dot.y{background:var(--chrome-y);} .dot.g{background:var(--chrome-g);}
-  .chrome .path{
-    margin-left:14px;
-    font-size:12px;
-    color:var(--text-dim);
-    letter-spacing:.02em;
+  .nav-inner{
+    max-width:1120px; margin:0 auto; padding:18px 32px;
+    display:flex; align-items:center; justify-content:space-between;
   }
-
-  /* ===== HERO / PROMPT ===== */
-  .hero{
-    padding:38px 40px 30px 40px;
-    border-bottom:1px solid var(--line);
-  }
-  .prompt{
-    font-size:13px;
-    color:var(--text-dim);
-    margin-bottom:6px;
-  }
-  .prompt .u{color:var(--ok);}
-  .prompt .p{color:var(--amber);}
-  h1{
+  .logo{
     font-family:'JetBrains Mono', monospace;
-    font-weight:800;
-    font-size:clamp(32px,5.5vw,52px);
-    margin:4px 0 0 0;
-    color:#fff;
-    letter-spacing:-0.01em;
+    font-weight:700; font-size:19px; letter-spacing:-0.02em;
   }
-  .caret{
-    display:inline-block;
-    width:0.5em; height:0.85em;
-    background:var(--amber);
-    margin-left:6px;
-    vertical-align:-0.08em;
-    animation:blink 1s steps(1) infinite;
+  .logo .br{color:var(--orange);}
+  nav.links{display:flex; gap:30px; align-items:center;}
+  nav.links a{
+    font-size:14.5px; font-weight:500; color:var(--ink);
+    text-decoration:none; padding-bottom:4px; position:relative;
   }
-  @media (prefers-reduced-motion: reduce){ .caret{animation:none; opacity:.8;} }
-  @keyframes blink{0%,49%{opacity:1;}50%,100%{opacity:0;}}
+  nav.links a.active{color:var(--ink);}
+  nav.links a.active::after{
+    content:""; position:absolute; left:0; right:0; bottom:-6px;
+    height:2px; background:var(--orange);
+  }
+  .nav-cta{
+    background:var(--ink); color:#fff; font-size:13.5px; font-weight:600;
+    padding:11px 20px; border-radius:999px; text-decoration:none;
+    box-shadow:3px 3px 0 var(--orange); border:2px solid var(--ink);
+    white-space:nowrap;
+  }
+  @media (max-width:820px){ nav.links{display:none;} }
 
-  .role-line{
-    margin-top:10px;
-    font-size:14px;
-    color:var(--amber);
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;
+    padding:72px 32px 56px 32px;
+    background-image:radial-gradient(var(--dot) 1.6px, transparent 1.6px);
+    background-size:24px 24px;
+    overflow:hidden;
   }
-  .role-line::before{content:"— "; color:var(--text-dim);}
+  .hero-inner{max-width:1120px; margin:0 auto; text-align:center; position:relative;}
+  .badge-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--ink); color:#fff;
+    font-size:12px; font-weight:600; letter-spacing:.02em;
+    padding:9px 18px; border-radius:999px; margin-bottom:26px;
+  }
+  .badge-pill .pulse{width:7px; height:7px; border-radius:50%; background:var(--orange);}
+  .hero h1{
+    font-weight:900;
+    font-size:clamp(34px,6vw,58px);
+    line-height:1.08;
+    letter-spacing:-0.02em;
+    color:var(--ink);
+  }
+  .hero h1 .hl{
+    color:var(--orange);
+    text-decoration:underline;
+    text-decoration-thickness:5px;
+    text-underline-offset:8px;
+    text-decoration-color:var(--orange);
+  }
+  .hero p.lead{
+    max-width:640px; margin:24px auto 0 auto;
+    color:var(--gray); font-size:15.5px; line-height:1.7;
+  }
+  .hero-actions{
+    display:flex; gap:16px; justify-content:center; margin-top:32px; flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:14.5px; font-weight:600;
+    padding:14px 26px; border-radius:999px;
+    text-decoration:none; transition:transform .15s ease;
+  }
+  .btn:hover{transform:translate(-2px,-2px);}
+  .btn-primary{
+    background:var(--ink); color:#fff; border:2px solid var(--ink);
+    box-shadow:4px 4px 0 var(--orange);
+  }
+  .btn-secondary{
+    background:#fff; color:var(--ink); border:2px solid var(--ink);
+  }
 
-  .contact-out{
-    margin-top:22px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px 26px;
-    font-size:12.5px;
-    color:var(--text-dim);
+  .stats{
+    max-width:1120px; margin:52px auto 0 auto;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
   }
-  .contact-out span::before{content:"• "; color:var(--amber-dim);}
-  .contact-out a{color:var(--text); text-decoration:none; border-bottom:1px dotted var(--line);}
-  .contact-out a:hover{color:var(--amber); border-color:var(--amber);}
+  .stat-card{
+    background:var(--card); border:2px solid var(--ink); border-radius:16px;
+    padding:22px 14px; text-align:center;
+  }
+  .stat-card .num{font-weight:900; font-size:30px; color:var(--orange); letter-spacing:-0.02em;}
+  .stat-card .lbl{
+    font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--gray);
+    text-transform:uppercase; letter-spacing:.04em; margin-top:4px;
+  }
+  @media (max-width:700px){ .stats{grid-template-columns:repeat(2,1fr);} }
 
-  /* ===== LAYOUT ===== */
-  main{
-    display:grid;
-    grid-template-columns:280px 1fr;
+  /* ================= TICKER ================= */
+  .ticker{
+    background:var(--ink); overflow:hidden; padding:16px 0;
+    white-space:nowrap;
   }
-  aside{
-    padding:34px 30px;
-    border-right:1px solid var(--line);
-    background:var(--panel);
+  .ticker-track{
+    display:inline-flex; gap:0; animation:scroll 26s linear infinite;
   }
-  .content{padding:34px 40px;}
+  .ticker-track span{
+    color:#fff; font-weight:800; font-size:17px; letter-spacing:.02em;
+    padding:0 22px; text-transform:uppercase;
+  }
+  .ticker-track span.dot{color:var(--orange); padding:0; }
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
 
-  /* neofetch-style panel */
-  .neofetch{
-    font-size:12.5px;
-    line-height:1.85;
+  /* ================= SECTION HEAD ================= */
+  section{padding:76px 32px;}
+  .sec-head{max-width:640px; margin:0 auto 44px auto; text-align:center;}
+  .eyebrow{
+    display:inline-block; background:var(--ink); color:#fff;
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:600;
+    padding:6px 14px; border-radius:999px; margin-bottom:16px;
   }
-  .neofetch-head{
-    color:var(--amber);
-    font-weight:700;
-    font-size:13px;
-    margin-bottom:2px;
+  .sec-head h2{
+    font-weight:900; font-size:clamp(26px,3.6vw,38px); letter-spacing:-0.02em;
   }
-  .neofetch-rule{height:1px; background:var(--line); margin:10px 0 14px 0;}
-  .nf-row{display:grid; grid-template-columns:88px 1fr; gap:8px; margin-bottom:4px;}
-  .nf-row .k{color:var(--amber-dim);}
-  .nf-row .v{color:var(--text);}
-  .swatches{display:flex; gap:5px; margin-top:14px;}
-  .swatches i{width:14px; height:14px; border-radius:2px; display:block;}
+  .sec-head p{color:var(--gray); font-size:14.5px; margin-top:10px;}
 
-  aside .block{margin-top:30px;}
-  .aside-title{
-    font-size:11px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--text-dim);
-    margin-bottom:10px;
+  /* ================= COMPETENCES ================= */
+  .skills-grid{
+    max-width:1000px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
   }
-  .aside-title::before{content:"# "; color:var(--amber-dim);}
-
-  .badge-list{display:flex; flex-wrap:wrap; gap:6px;}
+  .skill-card{
+    background:var(--card); border:2px solid var(--ink); border-radius:16px;
+    padding:20px 16px; display:flex; align-items:center; gap:12px;
+    cursor:pointer; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .skill-card:hover{transform:translateY(-3px); box-shadow:4px 4px 0 var(--ink);}
+  .skill-card.active{background:var(--ink);}
+  .skill-card.active .skill-name{color:#fff;}
+  .skill-icon{
+    width:38px; height:38px; border-radius:10px; background:var(--peach);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .skill-icon svg{width:19px; height:19px; stroke:var(--orange);}
+  .skill-name{font-weight:700; font-size:14.5px;}
+  .skill-panel{
+    max-width:1000px; margin:18px auto 0 auto;
+    background:var(--card); border:2px solid var(--ink); border-radius:16px;
+    padding:22px 26px; display:none;
+  }
+  .skill-panel.show{display:block;}
+  .badge-row{display:flex; flex-wrap:wrap; gap:9px;}
   .badge{
-    font-size:11px;
-    padding:4px 9px;
-    border:1px solid var(--line);
-    color:var(--text);
-    background:var(--panel-alt);
+    font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:500;
+    padding:7px 13px; border:1.5px solid var(--ink); border-radius:999px;
+    background:var(--bg);
   }
-  .badge.ok{border-color:rgba(127,217,154,0.4); color:var(--ok);}
+  .badge.ok{border-color:var(--orange); color:var(--orange); background:var(--peach);}
   .badge.ok::before{content:"✓ ";}
 
-  .practice{font-size:12px; color:var(--text-dim); line-height:1.6;}
-  .practice strong{color:var(--amber);}
-
-  .lang-row{margin-bottom:12px; font-size:12.5px;}
-  .lang-row:last-child{margin-bottom:0;}
-  .lang-top{display:flex; justify-content:space-between; margin-bottom:5px;}
-  .lang-top .lvl{color:var(--text-dim); font-size:11px;}
-  .meter{height:4px; background:var(--panel-alt); border:1px solid var(--line); position:relative;}
-  .meter i{position:absolute; inset:0; width:0; background:var(--amber);}
-
-  ul.plain{list-style:none; margin:0; padding:0; font-size:12.5px; line-height:1.8; color:var(--text-dim);}
-  ul.plain li::before{content:"- "; color:var(--amber-dim);}
-
-  /* ===== CONTENT SECTIONS (command style) ===== */
-  section{margin-bottom:32px;}
-  section:last-child{margin-bottom:0;}
-  .cmd{
-    font-size:12.5px;
-    color:var(--text-dim);
-    margin-bottom:14px;
-    padding-bottom:8px;
-    border-bottom:1px solid var(--line);
+  /* ================= TIMELINE / CARDS ================= */
+  .stack-col{max-width:820px; margin:0 auto; display:flex; flex-direction:column; gap:18px;}
+  .card{
+    background:var(--card); border:2px solid var(--ink); border-radius:18px;
+    padding:26px 28px;
   }
-  .cmd .p{color:var(--ok);}
-  .cmd .c{color:var(--amber);}
-
-  .entry{
-    position:relative;
-    padding-left:20px;
-    margin-bottom:22px;
-    border-left:2px solid var(--line);
+  .card-head{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:8px 16px; margin-bottom:6px;
   }
-  .entry:last-child{margin-bottom:0;}
-  .entry::before{
-    content:"";
-    position:absolute; left:-6px; top:3px;
-    width:10px; height:10px;
-    background:var(--bg);
-    border:2px solid var(--amber);
-    border-radius:2px;
+  .card-title{font-weight:800; font-size:17.5px; letter-spacing:-0.01em;}
+  .card-date{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:600;
+    background:var(--peach); color:var(--orange); padding:5px 12px; border-radius:999px;
+    white-space:nowrap;
   }
-  .entry-head{
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px 14px;
-    margin-bottom:2px;
-  }
-  .entry-title{font-family:'JetBrains Mono', monospace; font-weight:700; font-size:15px; color:#fff;}
-  .entry-date{font-size:11px; color:var(--amber-dim); white-space:nowrap; padding-top:3px;}
-  .entry-sub{font-size:12.5px; color:var(--text-dim); margin-bottom:8px;}
-  .entry-body{font-size:13px; line-height:1.65; color:var(--text);}
-
-  .tag-row{display:flex; flex-wrap:wrap; gap:6px; margin-top:9px;}
+  .card-sub{color:var(--gray); font-size:13.5px; margin-bottom:10px;}
+  .card-body{font-size:14px; color:#333; line-height:1.65;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
   .tag{
-    font-size:10.5px;
-    padding:3px 8px;
-    border:1px solid var(--line);
-    color:var(--amber);
-    background:rgba(255,180,84,0.06);
+    font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:500;
+    color:var(--orange); border:1.5px solid var(--orange); background:var(--peach);
+    padding:4px 10px; border-radius:999px;
   }
-  .tag::before{content:"#";  color:var(--amber-dim); margin-right:2px;}
-
-  .mission-list{list-style:none; margin:10px 0 0 0; padding:0;}
-  .mission-list li{font-size:13px; line-height:1.6; color:var(--text); margin-bottom:7px; padding-left:16px; position:relative;}
+  .mission-list{list-style:none; margin-top:8px;}
+  .mission-list li{
+    font-size:14px; padding-left:20px; position:relative; margin-bottom:8px; color:#333;
+  }
   .mission-list li:last-child{margin-bottom:0;}
-  .mission-list li::before{content:"›"; position:absolute; left:0; color:var(--amber);}
-  .mission-list b{color:#fff;}
+  .mission-list li::before{content:"→"; position:absolute; left:0; color:var(--orange); font-weight:700;}
+  .mission-list b{color:var(--ink);}
 
-  footer{
-    padding:16px 40px;
-    border-top:1px solid var(--line);
-    background:var(--panel-alt);
-    font-size:11px;
-    color:var(--text-dim);
-    display:flex;
-    justify-content:space-between;
+  /* ================= LANGUES / INTERETS ================= */
+  .two-col{
+    max-width:820px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:18px;
   }
-  footer .p{color:var(--ok);}
+  @media (max-width:700px){ .two-col{grid-template-columns:1fr;} }
+  .lang-row{margin-bottom:16px;}
+  .lang-row:last-child{margin-bottom:0;}
+  .lang-top{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px;}
+  .lang-top b{font-weight:700;}
+  .lang-top span.lvl{color:var(--gray); font-family:'JetBrains Mono', monospace; font-size:11.5px;}
+  .meter{height:8px; background:var(--bg); border:1.5px solid var(--ink); border-radius:999px; overflow:hidden;}
+  .meter i{display:block; height:100%; background:var(--orange);}
+  .interest-list{list-style:none;}
+  .interest-list li{
+    display:flex; align-items:center; gap:10px; font-size:14px; padding:10px 0;
+    border-bottom:1px solid #eae7df;
+  }
+  .interest-list li:last-child{border-bottom:none;}
+  .interest-list li::before{content:"◆"; color:var(--orange); font-size:10px;}
 
-  @media (max-width:760px){
-    body{padding:12px 8px;}
-    .hero{padding:28px 22px 24px 22px;}
-    main{grid-template-columns:1fr;}
-    aside{border-right:none; border-bottom:1px solid var(--line);}
-    .content{padding:26px 22px;}
-    footer{padding:14px 22px; flex-direction:column; gap:4px;}
-    .entry-date{padding-top:0;}
+  /* ================= FOOTER ================= */
+  footer.cta{
+    background:var(--dark); color:#fff; padding:72px 32px 30px 32px;
+  }
+  .cta-inner{max-width:1120px; margin:0 auto;}
+  footer.cta h2{
+    font-weight:900; font-size:clamp(28px,4.4vw,44px); letter-spacing:-0.02em; line-height:1.15;
+  }
+  footer.cta h2 .hl{color:var(--orange);}
+  .cta-rule{height:1px; background:#2a2a2c; margin:34px 0 30px 0;}
+  .cta-row{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:22px;
+  }
+  .btn-cta{
+    background:var(--orange); color:#fff; border:2px solid var(--orange);
+    font-weight:700; font-size:14.5px; padding:15px 28px; border-radius:999px;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+  }
+  .icon-row{display:flex; gap:12px;}
+  .icon-circle{
+    width:44px; height:44px; border-radius:50%; border:1.5px solid #3a3a3c;
+    display:flex; align-items:center; justify-content:center; text-decoration:none;
+    transition:background .15s ease;
+  }
+  .icon-circle:hover{background:#1c1c1e;}
+  .icon-circle svg{width:18px; height:18px; stroke:#fff;}
+  .copyright{
+    margin-top:40px; font-size:11.5px; color:#77787c;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  @media (max-width:700px){
+    .skills-grid{grid-template-columns:repeat(2,1fr);}
+    section{padding:56px 20px;}
+    .hero{padding:56px 20px 44px 20px;}
+    .cta-row{flex-direction:column; align-items:flex-start;}
   }
 </style>
 </head>
 <body>
-<div class="window">
 
-  <div class="chrome">
-    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-    <span class="path">Samuel Masson — CV</span>
-  </div>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="logo"><span class="br">&lt;</span>Samuel<span class="br">/&gt;</span></div>
+      <nav class="links">
+        <a href="#accueil" class="active">Accueil</a>
+        <a href="#competences">Compétences</a>
+        <a href="#formation">Formation</a>
+        <a href="#projets">Projets</a>
+        <a href="#experience">Expérience</a>
+      </nav>
+      <a class="nav-cta" href="mailto:sammas52360@gmail.com">Me contacter</a>
+    </div>
+  </header>
 
-  <div class="hero">
-    <h1>Samuel Masson</h1>
-    <div class="role-line">Recherche de stage (1 mois et demi) — Cybersécurité / Administration système</div>
-    <div class="contact-out">
-      <span>Metz (57070)</span>
-      <span><a href="tel:0783944324">07 83 94 43 24</a></span>
-      <span><a href="mailto:sammas52360@gmail.com">sammas52360@gmail.com</a></span>
-      <span>Permis B — véhicule personnel</span>
+  <section class="hero" id="accueil">
+    <div class="hero-inner">
+      <div class="badge-pill mono"><span class="pulse"></span> Disponible pour un stage (1 à 3 mois) — 2026</div>
+      <h1>En recherche d'un stage en <span class="hl">Cybersécurité</span></h1>
+      <p class="lead">DevSecOps, réseau, administration système. Étudiant en 3ème année de Licence Informatique à Metz, entraînement régulier sur TryHackMe et Root-Me, et une première expérience terrain en gestion de projet chez Bouygues Bâtiment.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projets">Voir mes projets →</a>
+        <a class="btn btn-secondary" href="mailto:sammas52360@gmail.com">Me contacter</a>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num">4</div><div class="lbl">Projets informatiques</div></div>
+      <div class="stat-card"><div class="num">9</div><div class="lbl">Langages &amp; outils</div></div>
+      <div class="stat-card"><div class="num">1</div><div class="lbl">An d'alternance BTP</div></div>
+      <div class="stat-card"><div class="num">2027</div><div class="lbl">Fin de licence</div></div>
+    </div>
+  </section>
+
+  <div class="ticker">
+    <div class="ticker-track mono" id="tickerTrack">
+      <!-- filled by JS -->
     </div>
   </div>
 
-  <main>
-    <aside>
-      <div class="neofetch">
-        <div class="neofetch-head">Profil</div>
-        <div class="neofetch-rule"></div>
-        <div class="nf-row"><span class="k">Formation</span><span class="v">Licence Informatique</span></div>
-        <div class="nf-row"><span class="k">Lieu</span><span class="v">Metz, France</span></div>
-        <div class="nf-row"><span class="k">Âge</span><span class="v">23 (21/10/2002)</span></div>
-        <div class="nf-row"><span class="k">Langues</span><span class="v">FR / EN / ES</span></div>
-        <div class="nf-row"><span class="k">Stack</span><span class="v">9 langages/outils</span></div>
+  <section id="competences">
+    <div class="sec-head">
+      <span class="eyebrow mono">// STACK.JSON</span>
+      <h2>Compétences clés</h2>
+      <p>Clique sur une catégorie pour voir le détail des compétences.</p>
+    </div>
+    <div class="skills-grid" id="skillsGrid">
+      <div class="skill-card" data-target="panel-dev">
+        <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+        <div class="skill-name">Langages &amp; Dev</div>
       </div>
+      <div class="skill-card" data-target="panel-sys">
+        <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="6" rx="1"></rect><rect x="2" y="15" width="20" height="6" rx="1"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg></div>
+        <div class="skill-name">Systèmes &amp; Réseaux</div>
+      </div>
+      <div class="skill-card" data-target="panel-cyber">
+        <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5.25 3.75 9.75 9 11 5.25-1.25 9-5.75 9-11V6l-9-4z"></path></svg></div>
+        <div class="skill-name">Cybersécurité</div>
+      </div>
+      <div class="skill-card" data-target="panel-out">
+        <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div>
+        <div class="skill-name">Outils</div>
+      </div>
+    </div>
 
-      <div class="block">
-        <div class="aside-title">stack</div>
-        <div class="badge-list">
-          <span class="badge">C</span>
-          <span class="badge">Python</span>
-          <span class="badge">Java</span>
-          <span class="badge">HTML5</span>
-          <span class="badge">CSS</span>
-          <span class="badge">JavaScript</span>
-          <span class="badge">Git</span>
-          <span class="badge">MySQL</span>
-          <span class="badge">PHP</span>
+    <div class="skill-panel show" id="panel-dev">
+      <div class="badge-row">
+        <span class="badge">C</span><span class="badge">Python</span><span class="badge">Java</span>
+        <span class="badge">JavaFX</span><span class="badge">HTML5</span><span class="badge">CSS</span>
+        <span class="badge">JavaScript</span><span class="badge">PHP</span>
+      </div>
+    </div>
+    <div class="skill-panel" id="panel-sys">
+      <div class="badge-row">
+        <span class="badge">MySQL</span><span class="badge">Architecture client-serveur</span>
+        <span class="badge">Structures de données</span><span class="badge">Graphes orientés (PERT)</span>
+      </div>
+    </div>
+    <div class="skill-panel" id="panel-cyber">
+      <div class="badge-row">
+        <span class="badge ok">TryHackMe</span><span class="badge ok">Root-Me</span>
+        <span class="badge">CTF</span><span class="badge">Machines vulnérables</span>
+        <span class="badge">Sécurité offensive / défensive</span>
+        <span class="badge">Chiffrement AES</span><span class="badge">Hashage</span>
+        <span class="badge">Shodan</span>
+      </div>
+    </div>
+    <div class="skill-panel" id="panel-out">
+      <div class="badge-row">
+        <span class="badge">Git</span><span class="badge">Tests automatisés</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="formation">
+    <div class="sec-head">
+      <span class="eyebrow mono">// EDUCATION.LOG</span>
+      <h2>Formation</h2>
+    </div>
+    <div class="stack-col">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">3ème année Licence Informatique</div>
+          <div class="card-date mono">2024 — 2027</div>
         </div>
+        <div class="card-sub">UFR MIM, Metz (57070)</div>
       </div>
-
-      <div class="block">
-        <div class="aside-title">pratique_cyber</div>
-        <div class="badge-list" style="margin-bottom:8px;">
-          <span class="badge ok">TryHackMe</span>
-          <span class="badge ok">Root-Me</span>
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">3ème année école d'ingénieur — Travaux de la construction</div>
+          <div class="card-date mono">2023 — 2024</div>
         </div>
-        <div class="practice">Entraînement autodidacte en sécurité offensive/défensive (CTF, machines vulnérables).</div>
+        <div class="card-sub">ESITC Metz (57070)</div>
       </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Classe préparatoire ATS Génie Civil</div>
+          <div class="card-date mono">2022 — 2023</div>
+        </div>
+        <div class="card-sub">Lycée Emmanuel Héré (54520)</div>
+      </div>
+    </div>
+  </section>
 
-      <div class="block">
-        <div class="aside-title">langues</div>
+  <section id="projets">
+    <div class="sec-head">
+      <span class="eyebrow mono">// PROJECTS.JSON</span>
+      <h2>Projets informatiques</h2>
+    </div>
+    <div class="stack-col">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Gestionnaire de mots de passe</div>
+          <div class="card-date mono">En cours</div>
+        </div>
+        <div class="card-sub">MySQL · Chiffrement AES · Hashage</div>
+        <div class="card-body">Développement d'un gestionnaire de mots de passe sécurisé : conception d'une base de données MySQL, chiffrement des données sensibles en AES et stockage des mots de passe via une table de hash.</div>
+        <div class="tag-row"><span class="tag">mysql</span><span class="tag">aes</span><span class="tag">hashage</span><span class="tag">securite</span></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Cluedo multijoueur</div>
+        </div>
+        <div class="card-sub">Java · JavaFX · SQL</div>
+        <div class="card-body">Conception et développement d'un jeu Cluedo en réseau avec architecture client-serveur, interface graphique, gestion des règles métier et tests automatisés.</div>
+        <div class="tag-row"><span class="tag">client-serveur</span><span class="tag">javafx</span><span class="tag">tests-auto</span></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Enveloppe convexe 2D</div>
+        </div>
+        <div class="card-sub">Langage C</div>
+        <div class="card-body">Implémentation et optimisation d'algorithmes de géométrie computationnelle, analyse de complexité, utilisation de listes chaînées, arbres binaires et tas.</div>
+        <div class="tag-row"><span class="tag">geometrie-algo</span><span class="tag">structures-donnees</span></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Planification de projet PERT</div>
+        </div>
+        <div class="card-sub">Langage C</div>
+        <div class="card-body">Développement d'un outil d'ordonnancement de tâches utilisant des graphes orientés acycliques pour calculer les dépendances, marges, dates de réalisation et chemin critique.</div>
+        <div class="tag-row"><span class="tag">graphes</span><span class="tag">ordonnancement</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <span class="eyebrow mono">// WORK.HISTORY</span>
+      <h2>Expérience professionnelle</h2>
+    </div>
+    <div class="stack-col">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Alternance — Bouygues Bâtiment Nord Est</div>
+          <div class="card-date mono">Sept. 2023 — Août 2024</div>
+        </div>
+        <div class="card-sub">Nancy (54000)</div>
+        <ul class="mission-list">
+          <li><b>Chef de chantier</b> — Coordination des équipes, supervision des travaux sur site.</li>
+          <li><b>Conducteur de travaux</b> — Planification et suivi de l'avancement des projets.</li>
+          <li><b>Étude de prix</b> — Réalisation de devis, analyses de coûts pour des projets de construction.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="profil-extra">
+    <div class="sec-head">
+      <span class="eyebrow mono">// PROFILE.INFO</span>
+      <h2>Langues &amp; centres d'intérêt</h2>
+    </div>
+    <div class="two-col">
+      <div class="card">
         <div class="lang-row">
-          <div class="lang-top"><span>Français</span><span class="lvl">natif</span></div>
+          <div class="lang-top"><b>Français</b><span class="lvl">natif</span></div>
           <div class="meter"><i style="width:100%"></i></div>
         </div>
         <div class="lang-row">
-          <div class="lang-top"><span>Anglais</span><span class="lvl">TOEIC 865/990</span></div>
+          <div class="lang-top"><b>Anglais</b><span class="lvl">TOEIC 865/990</span></div>
           <div class="meter"><i style="width:87%"></i></div>
         </div>
         <div class="lang-row">
-          <div class="lang-top"><span>Espagnol</span><span class="lvl">B1</span></div>
+          <div class="lang-top"><b>Espagnol</b><span class="lvl">B1</span></div>
           <div class="meter"><i style="width:45%"></i></div>
         </div>
       </div>
-
-      <div class="block">
-        <div class="aside-title">centre d'intérêt</div>
-        <ul class="plain">
+      <div class="card">
+        <ul class="interest-list">
           <li>Voyages — UK, USA, Espagne, Canada</li>
           <li>Tennis</li>
+          <li>Permis B — véhicule personnel</li>
         </ul>
       </div>
-    </aside>
-
-    <div class="content">
-      <section>
-        <div class="cmd"><span class="c">Formation</span></div>
-
-        <div class="entry">
-          <div class="entry-head">
-            <div class="entry-title">3ème année Licence Informatique</div>
-            <div class="entry-date">2024 — 2027</div>
-          </div>
-          <div class="entry-sub">UFR MIM, Metz (57070)</div>
-        </div>
-
-        <div class="entry">
-          <div class="entry-head">
-            <div class="entry-title">3ème année école d'ingénieur — Travaux de la construction</div>
-            <div class="entry-date">2023 — 2024</div>
-          </div>
-          <div class="entry-sub">ESITC Metz (57070)</div>
-        </div>
-
-        <div class="entry">
-          <div class="entry-head">
-            <div class="entry-title">Classe préparatoire ATS Génie Civil</div>
-            <div class="entry-date">2022 — 2023</div>
-          </div>
-          <div class="entry-sub">Lycée Emmanuel Héré (54520)</div>
-        </div>
-      </section>
-
-      <section>
-        <div class="cmd"><span class="c">Projets informatiques</span></div>
-
-        <div class="entry">
-          <div class="entry-head">
-            <div class="entry-title">Cluedo multijoueur</div>
-          </div>
-          <div class="entry-sub">Java · JavaFX · SQL</div>
-          <div class="entry-body">Conception et développement d'un jeu Cluedo en réseau avec architecture client-serveur, interface graphique, gestion des règles métier et tests automatisés.</div>
-          <div class="tag-row"><span class="tag">client-serveur</span><span class="tag">javafx</span><span class="tag">tests-auto</span></div>
-        </div>
-
-        <div class="entry">
-          <div class="entry-head">
-            <div class="entry-title">Enveloppe convexe 2D</div>
-          </div>
-          <div class="entry-sub">Langage C</div>
-          <div class="entry-body">Implémentation et optimisation d'algorithmes de géométrie computationnelle, analyse de complexité, utilisation de listes chaînées, arbres binaires et tas.</div>
-          <div class="tag-row"><span class="tag">geometrie-algo</span><span class="tag">structures-donnees</span></div>
-        </div>
-
-        <div class="entry">
-          <div class="entry-head">
-            <div class="entry-title">Planification de projet PERT</div>
-          </div>
-          <div class="entry-sub">Langage C</div>
-          <div class="entry-body">Développement d'un outil d'ordonnancement de tâches utilisant des graphes orientés acycliques pour calculer les dépendances, marges, dates de réalisation et chemin critique.</div>
-          <div class="tag-row"><span class="tag">graphes</span><span class="tag">ordonnancement</span></div>
-        </div>
-      </section>
-
-      <section>
-        <div class="cmd"><span class="c">Expérience professionnelle</span></div>
-
-        <div class="entry">
-          <div class="entry-head">
-            <div class="entry-title">Alternance — Bouygues Bâtiment Nord Est</div>
-            <div class="entry-date">Sept. 2023 — Août 2024</div>
-          </div>
-          <div class="entry-sub">Nancy (54000)</div>
-          <ul class="mission-list">
-            <li><b>Chef de chantier</b> — Coordination des équipes, supervision des travaux sur site.</li>
-            <li><b>Conducteur de travaux</b> — Planification et suivi de l'avancement des projets.</li>
-            <li><b>Étude de prix</b> — Réalisation de devis, analyses de coûts pour des projets de construction.</li>
-          </ul>
-        </div>
-      </section>
     </div>
-  </main>
+  </section>
 
-  <footer>
-    <span><span class="p">●</span> CV — Samuel Masson</span>
-    <span>Mise à jour 2026</span>
+  <footer class="cta">
+    <div class="cta-inner">
+      <h2>Envie d'échanger ? <span class="hl">Contactons-nous.</span></h2>
+      <div class="cta-rule"></div>
+      <div class="cta-row">
+        <a class="btn-cta" href="mailto:sammas52360@gmail.com">sammas52360@gmail.com →</a>
+        <div class="icon-row">
+          <a class="icon-circle" href="tel:0783944324" title="Téléphone">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </a>
+          <a class="icon-circle" href="mailto:sammas52360@gmail.com" title="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></svg>
+          </a>
+          <a class="icon-circle" href="#" title="Metz, France">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </a>
+        </div>
+      </div>
+      <div class="copyright">
+        <span>© 2026 Samuel Masson — Tous droits réservés.</span>
+        <span>Metz (57070) · Permis B</span>
+      </div>
+    </div>
   </footer>
-</div>
+
+<script>
+  // Ticker content
+  const words = ["CYBERSÉCURITÉ","LICENCE INFORMATIQUE","ADMINISTRATION SYSTÈME","JAVA","PYTHON","TRYHACKME","ROOT-ME","RÉSEAUX"];
+  const track = document.getElementById('tickerTrack');
+  function buildTicker(){
+    let html = "";
+    for(let r=0;r<2;r++){
+      words.forEach(w=>{ html += `<span>${w}</span><span class="dot">•</span>`; });
+    }
+    track.innerHTML = html;
+  }
+  buildTicker();
+
+  // Skill card toggle
+  const cards = document.querySelectorAll('.skill-card');
+  const panels = document.querySelectorAll('.skill-panel');
+  cards[0].classList.add('active');
+  cards.forEach(card=>{
+    card.addEventListener('click', ()=>{
+      cards.forEach(c=>c.classList.remove('active'));
+      panels.forEach(p=>p.classList.remove('show'));
+      card.classList.add('active');
+      document.getElementById(card.dataset.target).classList.add('show');
+    });
+  });
+</script>
+
 </body>
 </html>
